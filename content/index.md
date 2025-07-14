@@ -1,5 +1,7 @@
-# My First Page
-
-Here is some content.
+# Nuxt AI Chat Example
 
 [Chat with me!](/chat)
+
+```js
+console.log('Hi, mom!')
+```

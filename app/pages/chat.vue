@@ -12,8 +12,17 @@ const chat = new Chat({
   onError: (error) => {
     console.error(error);
   },
+  onFinish: (message) => {
+    chatInput.value?.inputRef?.focus();
+  }
 });
+
+const components = {
+  pre: resolveComponent('ProsePreStream') as any
+};
+
 const input = ref("");
+const chatInput = useTemplateRef('chatInput');
 
 const disabled = computed(() => chat.status === "submitted");
 
@@ -26,7 +35,7 @@ const handleSubmit = (e: Event) => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+  <div class="flex flex-col w-full max-w-md py-24 mx-auto space-y-4">
     <div v-for="m in chat.messages" :key="m.id" class="whitespace-pre-wrap">
       <div class="text-gray-500">{{ m.role === "user" ? "User: " : "AI: " }}</div>
       <div
@@ -36,7 +45,9 @@ const handleSubmit = (e: Event) => {
         <MDCCached v-if="part.type === 'text'"
           :value="getTextFromMessage(m)"
           :cache-key="m.id"
+          class="space-y-2"
           unwrap="p"
+          :components="components"
           :parser-options="{ highlight: false }"
         />
       </div>
@@ -60,6 +71,7 @@ const handleSubmit = (e: Event) => {
         autofocus
         class="fixed bottom-0 w-full max-w-md mb-8"
         v-model="input"
+        ref="chatInput"
         placeholder="Say something..."
         :disabled="disabled"
       />

@@ -12,6 +12,18 @@ export default defineNuxtConfig({
     azureResourceName: '',
     mcpUrl: 'http://localhost:3000/__mcp/sse',
   },
+  mdc: {
+    highlight: {
+      // noApiRoute: true
+      shikiEngine: 'javascript'
+    },
+    components: {
+      prose: true,
+      map: {
+        a: 'ULink'
+      }
+    }
+  },
 
   css: ['@/assets/css/main.css'],
   modules: ['@nuxt/ui', '@nuxt/test-utils', '@nuxt/content', 'nuxt-mcp'],

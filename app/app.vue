@@ -1,5 +1,19 @@
+<script setup lang="ts">
+const navigation = [
+  {
+    label: 'Home',
+    to: '/'
+  },
+  {
+    label: 'Chat',
+    to: '/chat'
+  }
+]
+</script>
+
 <template>
-  <UApp>
+  <NuxtLayout>
+    <UNavigationMenu :items="navigation" />
     <NuxtPage />
-  </UApp>
+  </NuxtLayout>
 </template>
